@@ -1,0 +1,11 @@
+﻿  main.cpp
+d:\desktop\wrathofwartha\wrathofwartha\main.cpp(1): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "SFML\Graphics.hpp": No such file or directory
+  SceneNode.cpp
+d:\desktop\wrathofwartha\wrathofwartha\scenenode.h(2): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "SFML/System/NonCopyable.hpp": No such file or directory
+  Game.cpp
+d:\desktop\wrathofwartha\wrathofwartha\game.h(2): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "SFML\Graphics.hpp": No such file or directory
+  Entity.cpp
+d:\desktop\wrathofwartha\wrathofwartha\utils.h(3): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "SFML\Graphics.hpp": No such file or directory
+  Aircraft.cpp
+d:\desktop\wrathofwartha\wrathofwartha\utils.h(3): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "SFML\Graphics.hpp": No such file or directory
+  Code wird generiert...
