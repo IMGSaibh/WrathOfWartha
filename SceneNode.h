@@ -14,37 +14,50 @@
 #include <memory>
 #include <cassert>
 
+
+struct Command;
+
 class SceneNode : public sf::Transformable, public sf::Drawable, public sf::NonCopyable
 {
 
 public:
 	
-	typedef				std::unique_ptr<SceneNode> Ptr;
+	typedef					std::unique_ptr<SceneNode> Ptr;
 
-	void				attachChild(Ptr child);
-	Ptr					deattachChild(const SceneNode& node);
-	void				update(sf::Time dt);
+
 
 
 public:
 	SceneNode();
+	void					attachChild(Ptr child);
+	Ptr						deattachChild(const SceneNode& node);
+	void					update(sf::Time dt);
 
-	~SceneNode();
+	sf::Vector2f			getWorldPosition() const;
+	sf::Transform			getWorldTransform() const;
 
-private:
-
-	virtual void		draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	virtual void		drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
-	virtual void		updateCurrent(sf::Time dt);
-	void				updateChildren(sf::Time dt);
-	sf::Transform		getWorldTransform() const;
-	sf::Vector2f		getWorldPosition()const;
+	void					onCommand(const Command& command, sf::Time dt);
+	virtual unsigned int	getCategory() const;
 
 
 private:
 
-	std::vector<Ptr>	mChildren;
-	SceneNode*			mParent;
+	virtual void			updateCurrent(sf::Time dt);
+	void					updateChildren(sf::Time dt);
+
+	virtual void			draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	virtual void			drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
+	void					drawChildren(sf::RenderTarget& target, sf::RenderStates states) const;
+
+
+	//sf::Transform			getWorldTransform() const;
+	//sf::Vector2f			getWorldPosition()const;
+
+
+private:
+
+	std::vector<Ptr>		mChildren;
+	SceneNode*				mParent;
 
 };
 

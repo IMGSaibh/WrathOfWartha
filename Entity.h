@@ -13,14 +13,18 @@ class Entity : public SceneNode
 {
 public:
 	
-	Entity();
 	void setVelocity(sf::Vector2f velocity);
 	void setVelocity(float vx, float vy);
+
+	void accelerate(sf::Vector2f velocity);
+	void accelerate(float vx, float vy);
+
+
 	sf::Vector2f getVelocity() const;
 
-	void updateCurrent(sf::Time dt);
 
-	~Entity();
+private:
+	void updateCurrent(sf::Time dt);
 
 
 private:

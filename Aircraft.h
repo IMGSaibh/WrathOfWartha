@@ -37,4 +37,4 @@ private:
 
 };
 
-#endif // !AIRCRAFT_HPP
+#endif // AIRCRAFT_HPP

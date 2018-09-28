@@ -8,8 +8,16 @@ using namespace utils;
 
 int main()
 {
-	Game game;
-	std::cout << utils::getWorkingDir();
-	game.run();
+
+	try
+	{
+		Game game;
+		game.run();
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "\n EXCEPTION: " << e.what() << std::endl;
+	}
+	
 	return 0;
 }

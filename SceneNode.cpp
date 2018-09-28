@@ -1,5 +1,8 @@
 #include "SceneNode.h"
 #include "Foreach.h"
+#include "Command.h"
+#include <algorithm>
+#include <cassert>
 
 
 SceneNode::SceneNode()
@@ -63,9 +66,15 @@ void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 }
 
+void SceneNode::drawChildren(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	FOREACH(const Ptr& child, mChildren)
+		child->draw(target, states);
+}
+
 void SceneNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
-
+	// Do nothing by default
 }
 
 void SceneNode::updateCurrent(sf::Time dt)
@@ -94,7 +103,18 @@ sf::Vector2f SceneNode::getWorldPosition() const
 	return getWorldTransform() * sf::Vector2f();
 }
 
-SceneNode::~SceneNode()
-{	
+void SceneNode::onCommand(const Command& command, sf::Time dt)
+{
+	// Command current node, if category matches
+	if (command.category & getCategory())
+		command.action(*this, dt);
 
+	// Command children
+	FOREACH(Ptr& child, mChildren)
+		child->onCommand(command, dt);
+}
+
+unsigned int SceneNode::getCategory() const
+{
+	return Category::Scene;
 }
