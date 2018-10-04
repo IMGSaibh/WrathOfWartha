@@ -1,18 +1,22 @@
 //=================================
 // included dependencies
 
-#include"Game.h"
-#include"Utils.h"
-
-using namespace utils;
+#include "Utility.h"
+//#include"Game.h"
+#include "Application.h"
 
 int main()
 {
 
 	try
 	{
-		Game game;
-		game.run();
+		std::cout << "Arbeitsverzeichnis " << getWorkingDir();
+		//Game game;
+		//game.run();
+
+		Application app; 
+		app.run();
+
 	}
 	catch (const std::exception& e)
 	{

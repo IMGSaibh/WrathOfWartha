@@ -9,10 +9,13 @@
 
 #include "Command.h"
 #include <SFML\Window\Event.hpp>
-
 #include<map>
 
 class CommandQueue;
+
+
+// represents the Players input
+// for manupulating sceneNodes in SceneGraph
 
 class Player
 {
@@ -25,6 +28,8 @@ public:
 		MoveLeft,
 		MoveUp,
 		MoveDown,
+		Fire,
+		LunchMissiles,
 		ActionCount
 	};
 

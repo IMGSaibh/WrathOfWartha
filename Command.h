@@ -14,6 +14,7 @@
 
 class SceneNode;
 
+// Commands are passed to SceneGraph
 
 struct Command
 {

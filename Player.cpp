@@ -2,6 +2,7 @@
 #include "CommandQueue.h"
 #include "Aircraft.h"
 #include "Foreach.h"
+#include <iostream>
 
 
 struct AircraftMover
@@ -16,20 +17,18 @@ struct AircraftMover
 	{
 		aircraft.accelerate(velocity);
 	}
-
-
-
 	sf::Vector2f								velocity;
+
 };
 
 Player::Player()
 {
 
 	// Set initial key bindings
-	mKeyBinding[sf::Keyboard::Left] = MoveLeft;
-	mKeyBinding[sf::Keyboard::Right] = MoveRight;
-	mKeyBinding[sf::Keyboard::Up] = MoveUp;
-	mKeyBinding[sf::Keyboard::Down] = MoveDown;
+	mKeyBinding[sf::Keyboard::Left]		= MoveLeft;
+	mKeyBinding[sf::Keyboard::Right]	= MoveRight;
+	mKeyBinding[sf::Keyboard::Up]		= MoveUp;
+	mKeyBinding[sf::Keyboard::Down]		= MoveDown;
 
 	// Set initial action bindings
 	initializeActions();
@@ -42,24 +41,50 @@ Player::Player()
 
 void Player::handleEvent(const sf::Event& event, CommandQueue& commands)
 {
+	//if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter)
+	//{
+	//	Command output;
+	//	output.category = Category::PlayerAircraft;
+	//	output.action = [](SceneNode& s, sf::Time)
+	//	{
+	//		std::cout << s.getPosition().x << ","
+	//			<< s.getPosition().y << "\n";
+	//	};
+	//	commands.push(output);
+	//}
+
 	if (event.type == sf::Event::KeyPressed)
 	{
+
 		// Check if pressed key appears in key binding, trigger command if so
 		auto found = mKeyBinding.find(event.key.code);
 		if (found != mKeyBinding.end() && !isRealtimeAction(found->second))
 			commands.push(mActionBinding[found->second]);
 	}
+
+
+
+
 }
 
-void Player::handleRealtimeInput(CommandQueue & commands)
+
+void Player::handleRealtimeInput(CommandQueue& commands)
 {
-	// Traverse all assigned keys and check if they are pressed
-	FOREACH(auto pair, mKeyBinding)
+	//// Traverse all assigned keys and check if they are pressed
+	//FOREACH(auto pair, mKeyBinding)
+	//{
+	//	// If key is pressed, lookup action and trigger corresponding command
+	//	if (sf::Keyboard::isKeyPressed(pair.first) && isRealtimeAction(pair.second))
+	//		commands.push(mActionBinding[pair.second]);
+	//}
+	
+	for (auto pair : mKeyBinding) 
 	{
-		// If key is pressed, lookup action and trigger corresponding command
 		if (sf::Keyboard::isKeyPressed(pair.first) && isRealtimeAction(pair.second))
 			commands.push(mActionBinding[pair.second]);
 	}
+
+
 }
 
 
@@ -80,7 +105,13 @@ void Player::assignKey(Action action, sf::Keyboard::Key key)
 
 sf::Keyboard::Key Player::getAssignedKey(Action action) const
 {
-	FOREACH(auto pair, mKeyBinding)
+	//FOREACH(auto pair, mKeyBinding)
+	//{
+	//	if (pair.second == action)
+	//		return pair.first;
+	//}
+
+	for (auto pair : mKeyBinding) 
 	{
 		if (pair.second == action)
 			return pair.first;

@@ -71,7 +71,6 @@ private:
 	float											mScrollSpeed;
 	Aircraft*										mPlayerAircraft;
 
-
 };
 
 

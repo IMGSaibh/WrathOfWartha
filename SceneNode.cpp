@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <cassert>
 
+#include <iostream>
 
 SceneNode::SceneNode()
 : mChildren()
@@ -110,8 +111,9 @@ void SceneNode::onCommand(const Command& command, sf::Time dt)
 		command.action(*this, dt);
 
 	// Command children
-	FOREACH(Ptr& child, mChildren)
+	FOREACH(Ptr& child, mChildren) 
 		child->onCommand(command, dt);
+	
 }
 
 unsigned int SceneNode::getCategory() const

@@ -18,11 +18,11 @@
 // {
 //     i += 2;
 // }
-#define FOREACH(declaration, container)																											\
-	if (bool LINE_ID(broken) = false) {} else																								\
+#define FOREACH(declaration, container)																						\
+	if (bool LINE_ID(broken) = false) {} else																				\
 	for (auto LINE_ID(itr) = (container).begin(); LINE_ID(itr) != (container).end() && !LINE_ID(broken); ++LINE_ID(itr))	\
-	if (bool LINE_ID(passed) = false) {} else																								\
-	if (LINE_ID(broken) = true, false) {} else																								\
+	if (bool LINE_ID(passed) = false) {} else																				\
+	if (LINE_ID(broken) = true, false) {} else																				\
 	for (declaration = *LINE_ID(itr); !LINE_ID(passed); LINE_ID(passed) = true, LINE_ID(broken) = false)
 
 #endif // BOOK_FOREACH_HPP

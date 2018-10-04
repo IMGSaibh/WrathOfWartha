@@ -33,7 +33,7 @@ Resource& ResourceHolder<Resource, Identifier>::get(Identifier id)
 {
 	auto found = mResourceMap.find(id);
 	assert(found != mResourceMap.end());
-
+	
 	return *found->second;
 }
 

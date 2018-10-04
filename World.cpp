@@ -25,21 +25,18 @@ void World::update(sf::Time dt)
 
 	// Scroll the world
 	mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());
+	mPlayerAircraft->setVelocity(0.f,0.f);
 
-	// Move the player sidewards (plane scouts follow the main aircraft)
-	sf::Vector2f position = mPlayerAircraft->getPosition();
-	sf::Vector2f velocity = mPlayerAircraft->getVelocity();
 
-	// If player touches borders, flip its X velocity
-	if (position.x <= mWorldBounds.left + 150.f	|| position.x >= mWorldBounds.left + mWorldBounds.width - 150.f)
-	{
-		velocity.x = -velocity.x;
-		mPlayerAircraft->setVelocity(velocity);
-	}
+	// Forward commands to scene graph, adapt velocity (scrolling, diagonal correction)
+	while (!mCommandQueue.isEmtpy())
+		mSceneGraph.onCommand(mCommandQueue.pop(), dt);
 
-	// Apply movements
+	adaptPlayerVelocity();
+
+	// Regular update step, adapt position (correct if outside view)
 	mSceneGraph.update(dt);
-
+	adaptPlayerPosition();
 
 }
 
@@ -49,7 +46,7 @@ void World::draw()
 	mWindow.draw(mSceneGraph);
 }
 
-CommandQueue & World::getCommandQueue()
+CommandQueue& World::getCommandQueue()
 {
 	return mCommandQueue;
 }
