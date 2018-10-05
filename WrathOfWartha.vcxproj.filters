@@ -66,6 +66,12 @@
     <ClCompile Include="PauseState.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="LoadingState.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="ParallelTask.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -135,6 +141,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="StringHelper.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingState.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ParallelTask.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

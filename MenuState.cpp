@@ -9,6 +9,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>
 
+sf::Text titleText;
 
 MenuState::MenuState(StateStack& stack, Context context)
 : State(stack, context)
@@ -21,9 +22,20 @@ MenuState::MenuState(StateStack& stack, Context context)
 	mBackgroundSprite.setTexture(texture);
 
 	// A simple menu demonstration
+
+	titleText.setFont(font);
+	titleText.setString("Phosphen the Game");
+	titleText.setCharacterSize(70u);
+	titleText.setFillColor(sf::Color::Red);
+	centerOrigin(titleText);
+	titleText.setPosition(	context.window->getView().getSize().x - context.window->getView().getSize().x / 2.f, 
+							context.window->getView().getSize().y - 360.f);
+ 
+
 	sf::Text playOption;
 	playOption.setFont(font);
 	playOption.setString("Play");
+	playOption.setCharacterSize(40u);
 	centerOrigin(playOption);
 	playOption.setPosition(context.window->getView().getSize() / 2.f);
 	mOptions.push_back(playOption);
@@ -31,6 +43,7 @@ MenuState::MenuState(StateStack& stack, Context context)
 	sf::Text exitOption;
 	exitOption.setFont(font);
 	exitOption.setString("Exit");
+	exitOption.setCharacterSize(40u);
 	centerOrigin(exitOption);
 	exitOption.setPosition(playOption.getPosition() + sf::Vector2f(0.f, 30.f));
 	mOptions.push_back(exitOption);
@@ -44,6 +57,9 @@ void MenuState::draw()
 
 	window.setView(window.getDefaultView());
 	window.draw(mBackgroundSprite);
+
+	// Draw Gametitle
+	window.draw(titleText);
 
 	FOREACH(const sf::Text& text, mOptions)
 		window.draw(text);
@@ -69,7 +85,9 @@ bool MenuState::handleEvent(const sf::Event& event)
 		}
 		else if (mOptionIndex == Exit)
 		{
-			// The exit option was chosen, by removing itself, the stack will be empty, and the game will know it is time to close.
+			// The exit option was chosen, by removing itself,
+			// the stack will be empty, and the game will close.
+			// performe a complete clearing of the whole satck if you want to implement more States
 			requestStackPop();
 		}
 	}

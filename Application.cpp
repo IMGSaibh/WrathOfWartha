@@ -23,12 +23,12 @@ Application::Application()
 {
 	mWindow.setKeyRepeatEnabled(false);
 
-	mFonts.load(Fonts::Main, "Resources\\Fonts\\Western Bang Bang.otf");
+	mFonts.load(Fonts::Main, "Resources\\Fonts\\Cabanyal-Z.ttf");
 	mTextures.load(Textures::TitleScreen, "Resources\\Images\\TitleScreen.png");
 
 	mStatisticsText.setFont(mFonts.get(Fonts::Main));
 	mStatisticsText.setPosition(5.f, 5.f);
-	mStatisticsText.setCharacterSize(20u);
+	mStatisticsText.setCharacterSize(40u);
 
 	registerStates();
 	mStateStack.pushState(States::Title);
